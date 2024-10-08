@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You've Been Trolled!</title>
+
+  <!-- Load Memz.js Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@skwalexe/memz@0.1.0/dist/memz.umd.js"></script>
+
+  <!-- Styles for fullscreen and troll effects -->
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: black;
+      cursor: none; /* Hide the real cursor */
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    .center-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 50px;
+      animation: flashingText 0.5s infinite;
+    }
+
+    @keyframes flashingText {
+      0% { color: white; }
+      50% { color: red; }
+      100% { color: white; }
+    }
+
+    /* Fullscreen warning and instruction text */
+    .instructions {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="center-content">
+    <h1>You've Been Trolled! 😈</h1>
+    <p class="instructions">Click anywhere to enter fullscreen mode and unleash chaos!</p>
+  </div>
+
+  <script>
+    // Wait for the page to load
+    window.addEventListener('load', function() {
+      // Initialize Memz.js
+      const mmz = new Memz('https://cdn.jsdelivr.net/gh/SkwalExe/Memz.js@0.1.0/src/assets/');
+
+      // Function to enable fullscreen
+      function enterFullScreen() {
+        const docElm = document.documentElement;
+        if (docElm.requestFullscreen) {
+          docElm.requestFullscreen();
+        } else if (docElm.mozRequestFullScreen) { /* Firefox */
+          docElm.mozRequestFullScreen();
+        } else if (docElm.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+          docElm.webkitRequestFullscreen();
+        } else if (docElm.msRequestFullscreen) { /* IE/Edge */
+          docElm.msRequestFullscreen();
+        }
+      }
+
+      // Start trolling when the user clicks anywhere on the screen
+      document.body.addEventListener('click', function() {
+        // Enter fullscreen mode
+        enterFullScreen();
+
+        // Start Memz.js effects - Activates all of the effects together
+        mmz.all();
+
+        // Trigger additional trolling effects one by one for full chaos
+        setTimeout(() => mmz.changeCursor(), 1000);       // Change cursor after 1 second
+        setTimeout(() => mmz.invertColors(), 2000);       // Invert colors after 2 seconds
+        setTimeout(() => mmz.messageBoxes(), 3000);       // Pop up message boxes after 3 seconds
+        setTimeout(() => mmz.rotateScreen(), 4000);       // Rotate screen after 4 seconds
+        setTimeout(() => mmz.floatingIcons(), 5000);      // Floating icons after 5 seconds
+        setTimeout(() => mmz.computerSounds(), 6000);     // Play computer sounds after 6 seconds
+
+        // Loop the message boxes to continuously pop up every few seconds
+        setInterval(() => mmz.messageBoxes(), 2000);      // Pop up a new message box every 2 seconds
+
+        // Loop computer sounds randomly for additional chaos
+        setInterval(() => mmz.computerSounds(), 3000);    // Play random Windows sounds every 3 seconds
+
+        // Keep rotating the screen randomly for ultimate confusion
+        setInterval(() => mmz.rotateScreen(), 5000);      // Rotate screen every 5 seconds
+      });
+    });
+  </script>
+
+</body>
+</html>
